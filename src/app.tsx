@@ -1,5 +1,7 @@
+import PrimaryNav from "@/components/primary-nav";
+
 function App() {
-  return <h1>Here we go again!</h1>;
+  return <PrimaryNav />;
 }
 
 export default App;
