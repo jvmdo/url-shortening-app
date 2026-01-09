@@ -1,7 +1,7 @@
-import PrimaryNav from "@/components/primary-nav";
+import HeroSection from "@/components/hero-section";
 
 function App() {
-  return <PrimaryNav />;
+  return <HeroSection />;
 }
 
 export default App;
