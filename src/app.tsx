@@ -1,7 +1,7 @@
-import HeroSection from "@/components/hero-section";
+import FeaturesSection from "@/components/features-section";
 
 function App() {
-  return <HeroSection />;
+  return <FeaturesSection />;
 }
 
 export default App;
