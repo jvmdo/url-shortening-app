@@ -57,3 +57,13 @@
 
   --color-primary-hover: hsl(from var(--color-primary) h s calc(l + 25));
 }
+
+@utility form-bg-image {
+  background-image: url(/images/bg-shorten-mobile.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
+
+  @media screen and (min-width: 1024px) {
+    background-image: url(/images/bg-shorten-desktop.svg);
+  }
+}

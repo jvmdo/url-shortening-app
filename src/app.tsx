@@ -1,5 +1,6 @@
 import HeroSection from "@/components/hero-section";
 import PrimaryNav from "@/components/primary-nav";
+import ShortenItForm from "@/components/shorten-it-form";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       </header>
       <main>
         <HeroSection />
+        <ShortenItForm />
       </main>
     </div>
   );
