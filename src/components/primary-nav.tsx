@@ -21,7 +21,7 @@ function PrimaryNav(props: ComponentProps<typeof NavigationMenu.Root>) {
           hiddenUntilFound={true}
           className="h-(--collapsible-panel-height) flex flex-col justify-end overflow-hidden transition-all ease-out data-ending-style:h-0 data-starting-style:h-0 duration-150 sm:contents"
         >
-          <NavigationMenu.List className="mt-4 px-6 py-8 flex flex-col gap-8 rounded-lg text-center text-white font-bold bg-primary-dark sm:flex-row sm:mt-0">
+          <NavigationMenu.List className="my-4 px-6 py-8 flex flex-col gap-8 rounded-lg text-center text-white font-bold bg-primary-dark sm:flex-row sm:mt-0">
             {navItems.map(({ title, href }) => (
               <NavigationMenu.Item key={title}>
                 <NavigationMenu.Link href={href} className="hover:text-primary">
