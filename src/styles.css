@@ -1,12 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  :root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-width: 320px;
+    max-width: 1800px;
+    margin-inline: auto;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  /* Apply global focus styles to common focusable elements */
+  button,
+  a,
+  input,
+  select,
+  textarea,
+  details,
+  [tabindex]:not([tabindex="-1"]) {
+    @apply focus-visible:outline-2 focus-visible:outline-offset-2 outline-body;
+  }
+
+  /* Ensure elements that typically don't have an outline by default still get one for accessibility if they are focusable */
+  :focus-visible {
+    outline: 2px solid hsl(255, 11%, 22%);
+    outline-offset: 2px;
+  }
 }
 
 @theme {
   --font-sans: "Poppins", system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+@theme inline {
+  --color-primary: hsl(180, 66%, 49%);
+  --color-primary-dark: hsl(257, 27%, 26%);
+  --color-error: hsl(0, 87%, 67%);
+  --color-body: hsl(255, 11%, 22%);
+  --color-muted: hsl(257, 7%, 63%);
+  --color-background: hsl(0, 0%, 75%);
+  --color-background-dark: hsl(260, 8%, 14%);
+  --color-white: hsl(0, 0%, 100%);
 }
