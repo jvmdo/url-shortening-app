@@ -16,6 +16,7 @@
     min-width: 320px;
     max-width: 1800px;
     margin-inline: auto;
+    font-weight: 500;
   }
 
   button:not(:disabled),
@@ -48,10 +49,10 @@
 @theme inline {
   --color-primary: hsl(180, 66%, 49%);
   --color-primary-dark: hsl(257, 27%, 26%);
+  --color-secondary: hsl(0, 0%, 75%);
   --color-error: hsl(0, 87%, 67%);
   --color-body: hsl(255, 11%, 22%);
   --color-muted: hsl(257, 7%, 63%);
-  /* --color-background: hsl(0, 0%, 75%); */
   --color-background: hsl(230, 25%, 95.29%);
   --color-background-dark: hsl(260, 8%, 14%);
   --color-white: hsl(0, 0%, 100%);
@@ -99,4 +100,19 @@
   @media screen and (min-width: 1280px) {
     --px: 10.625rem;
   }
+}
+
+@utility icon-primary {
+  filter: brightness(0) saturate(100%) invert(71%) sepia(85%) saturate(1500%)
+    hue-rotate(140deg) brightness(95%) contrast(90%);
+}
+
+@utility page-bg {
+  background: linear-gradient(
+    to bottom,
+    var(--color-white) 0%,
+    var(--color-white) 80%,
+    var(--color-background-dark) 80%,
+    var(--color-background-dark) 100%
+  );
 }

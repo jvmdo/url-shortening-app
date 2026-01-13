@@ -13,10 +13,12 @@ export interface NavSectionProps extends React.ComponentProps<"section"> {
 function NavSection({ title, items, ...delegated }: NavSectionProps) {
   return (
     <section {...delegated}>
-      <h4 className="mb-5 text-center lg:text-start">{title}</h4>
+      <h4 className="mb-5 font-bold text-white text-center lg:text-start">
+        {title}
+      </h4>
       <ul className="flex flex-col gap-2 items-center lg:items-start">
         {items.map(({ label, href }) => (
-          <li key={label}>
+          <li key={label} className="text-secondary hover:text-primary">
             <a href={href}>{label}</a>
           </li>
         ))}
