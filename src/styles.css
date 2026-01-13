@@ -69,6 +69,16 @@
   }
 }
 
+@utility cta-bg-image {
+  background-image: url(/images/bg-boost-mobile.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
+
+  @media screen and (min-width: 768px) {
+    background-image: url(/images/bg-boost-desktop.svg);
+  }
+}
+
 @utility page-px {
   --px: 1.5rem;
 

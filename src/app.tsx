@@ -1,3 +1,4 @@
+import Button from "@/components/button";
 import FeaturesSection from "@/components/features-section";
 import HeroSection from "@/components/hero-section";
 import PrimaryNav from "@/components/primary-nav";
@@ -16,6 +17,12 @@ function App() {
         <HeroSection className="page-px bg-white pb-42" />
         <ShortenItForm className="page-px absolute inset-x-0 -translate-y-1/2" />
         <FeaturesSection className="page-px bg-background pt-42 pb-20 sm:pb-22 md:pb-24 lg:pb-42 xl:pb-52" />
+        <section className="cta-bg-image bg-primary-dark page-px py-22 sm:py-20 md:py-18 lg:py-16 xl:py-14">
+          <h2 className="text-center text-[1.75rem] text-white font-bold mb-4">
+            Boost your links today
+          </h2>
+          <Button className="mx-auto">Get Started</Button>
+        </section>
       </main>
     </div>
   );
