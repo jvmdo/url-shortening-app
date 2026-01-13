@@ -51,7 +51,8 @@
   --color-error: hsl(0, 87%, 67%);
   --color-body: hsl(255, 11%, 22%);
   --color-muted: hsl(257, 7%, 63%);
-  --color-background: hsl(0, 0%, 75%);
+  /* --color-background: hsl(0, 0%, 75%); */
+  --color-background: hsl(230, 25%, 95.29%);
   --color-background-dark: hsl(260, 8%, 14%);
   --color-white: hsl(0, 0%, 100%);
 
@@ -65,5 +66,27 @@
 
   @media screen and (min-width: 1024px) {
     background-image: url(/images/bg-shorten-desktop.svg);
+  }
+}
+
+@utility page-px {
+  --px: 1.5rem;
+
+  padding-inline: var(--px);
+
+  @media screen and (min-width: 640px) {
+    --px: 2rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    --px: 2.5rem;
+  }
+
+  @media screen and (min-width: 1024px) {
+    --px: 7.5rem;
+  }
+
+  @media screen and (min-width: 1280px) {
+    --px: 10.625rem;
   }
 }

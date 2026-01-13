@@ -1,11 +1,21 @@
 import FeatureCard from "@/components/feature-card";
+import type { ComponentProps } from "react";
+import { twMerge } from "tailwind-merge";
 
-function FeaturesSection() {
+function FeaturesSection({
+  className,
+  ...delegated
+}: ComponentProps<"section">) {
   return (
-    <section className="px-6 flex flex-col justify-center gap-22">
+    <section
+      {...delegated}
+      className={twMerge("flex flex-col justify-center gap-22", className)}
+    >
       <div className="text-center">
-        <h2>Advanced Statistics</h2>
-        <p>
+        <h2 className="text-[1.75rem] text-body font-bold mb-6">
+          Advanced Statistics
+        </h2>
+        <p className="text-muted text-balance">
           Track how your links are performing across the web with our advanced
           statistics dashboard.
         </p>
@@ -16,25 +26,25 @@ function FeaturesSection() {
           title="Brand Recognition"
           content="Boost your brand recognition with each click. Generic links don't
             mean a thing. Branded links help instil confidence in your content."
-          className="place-self-start"
+          className="place-self-start z-10"
         />
         <FeatureCard
           imgSrc="/icons/detailed-records.svg"
           title="Detailed Records"
           content="Gain insights into who is clicking your links. Knowing when and
             where people engage with your content helps inform better decisions."
-          className="place-self-center lg:top-11"
+          className="place-self-center lg:top-11 z-10"
         />
         <FeatureCard
           imgSrc="/icons/fully-customizable.svg"
           title="Fully Customizable"
           content="Improve brand awareness and content discoverability through
             customizable links, supercharging audience engagement."
-          className="place-self-end lg:top-22"
+          className="place-self-end lg:top-22 z-10"
         />
         {/* Ribbon mobile/desktop */}
-        <span className="w-2 absolute inset-y-0 left-1/2 -translate-x-1/2 -z-10 bg-cyan-300 lg:hidden" />
-        <span className="absolute inset-x-0 top-3/5 -translate-y-1/2 -z-10 bg-cyan-300 lg:h-2" />
+        <span className="w-2 absolute inset-y-0 left-1/2 -translate-x-1/2 bg-cyan-300 lg:hidden" />
+        <span className="absolute inset-x-0 top-3/5 -translate-y-1/2 bg-cyan-300 lg:h-2" />
       </div>
     </section>
   );
