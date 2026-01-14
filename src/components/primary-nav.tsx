@@ -14,14 +14,14 @@ function PrimaryNav(props: ComponentProps<typeof NavigationMenu.Root>) {
   return (
     <NavigationMenu.Root {...props}>
       <Collapsible.Root className="flex flex-col w-full">
-        <Collapsible.Trigger className="relative group self-end sm:hidden">
+        <Collapsible.Trigger className="relative group self-end lg:hidden">
           <AnimatedHamburgerIcon />
         </Collapsible.Trigger>
         <Collapsible.Panel
           hiddenUntilFound={true}
-          className="h-(--collapsible-panel-height) flex flex-col justify-end overflow-hidden transition-all ease-out data-ending-style:h-0 data-starting-style:h-0 duration-150 sm:contents"
+          className="h-(--collapsible-panel-height) flex flex-col justify-end overflow-hidden transition-all ease-out data-ending-style:h-0 data-starting-style:h-0 duration-150 lg:contents data-open:mb-4"
         >
-          <NavigationMenu.List className="my-4 px-6 py-8 flex flex-col gap-8 rounded-lg text-center text-white font-bold bg-primary-dark sm:flex-row sm:mt-0">
+          <NavigationMenu.List className="mt-4 px-6 py-8 flex flex-col gap-8 rounded-lg text-center text-white font-bold bg-primary-dark lg:flex-row lg:items-center lg:mt-0 lg:py-0 lg:text-muted lg:bg-transparent">
             {navItems.map(({ title, href }) => (
               <NavigationMenu.Item key={title}>
                 <NavigationMenu.Link href={href} className="hover:text-primary">
@@ -32,10 +32,10 @@ function PrimaryNav(props: ComponentProps<typeof NavigationMenu.Root>) {
 
             <Separator
               orientation="horizontal"
-              className="h-px bg-background opacity-20 sm:hidden"
+              className="h-px bg-background opacity-20 lg:hidden"
             />
 
-            <NavigationMenu.Item className="sm:ml-auto">
+            <NavigationMenu.Item className="lg:ml-auto">
               <NavigationMenu.Link href="#" className="hover:text-primary">
                 Login
               </NavigationMenu.Link>
@@ -43,7 +43,7 @@ function PrimaryNav(props: ComponentProps<typeof NavigationMenu.Root>) {
             <NavigationMenu.Item>
               <NavigationMenu.Link
                 href="#"
-                className="block py-3 rounded-full bg-primary hover:bg-primary-hover"
+                className="block py-3 rounded-full text-white bg-primary hover:bg-primary-hover lg:w-22 xl:w-27"
               >
                 Sign Up
               </NavigationMenu.Link>

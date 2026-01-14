@@ -14,8 +14,6 @@
 
   body {
     min-width: 320px;
-    max-width: 1800px;
-    margin-inline: auto;
     font-weight: 500;
   }
 
@@ -62,18 +60,21 @@
 
 @utility form-bg-image {
   background-image: url(/images/bg-shorten-mobile.svg);
-  background-repeat: no-repeat;
   background-position: top right;
+  background-repeat: no-repeat;
+  background-size: 100% right;
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     background-image: url(/images/bg-shorten-desktop.svg);
+    background-size: 100% 100%;
   }
 }
 
 @utility cta-bg-image {
   background-image: url(/images/bg-boost-mobile.svg);
-  background-repeat: no-repeat;
   background-position: top right;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
   @media screen and (min-width: 768px) {
     background-image: url(/images/bg-boost-desktop.svg);
@@ -83,14 +84,12 @@
 @utility page-px {
   --px: 1.5rem;
 
-  padding-inline: var(--px);
-
   @media screen and (min-width: 640px) {
-    --px: 2rem;
+    --px: 3rem;
   }
 
   @media screen and (min-width: 768px) {
-    --px: 2.5rem;
+    --px: 3.5rem;
   }
 
   @media screen and (min-width: 1024px) {
@@ -100,6 +99,8 @@
   @media screen and (min-width: 1280px) {
     --px: 10.625rem;
   }
+
+  padding-inline: var(--px);
 }
 
 @utility icon-primary {
@@ -111,8 +112,13 @@
   background: linear-gradient(
     to bottom,
     var(--color-white) 0%,
-    var(--color-white) 80%,
-    var(--color-background-dark) 80%,
+    var(--color-white) 50%,
+    var(--color-background-dark) 50%,
     var(--color-background-dark) 100%
   );
+}
+
+@utility page-max-w {
+  max-width: 1440px;
+  margin-inline: auto;
 }

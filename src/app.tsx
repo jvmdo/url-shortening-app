@@ -7,25 +7,27 @@ import ShortenItForm from "@/components/shorten-it-form";
 
 function App() {
   return (
-    <div className="page-bg py-8 md:py-10 lg:py-12 xl:py-14">
-      <header className="group flex items-start sticky top-0 page-px bg-white z-50">
-        <h3 className="absolute flex items-center h-12 w-30 sm:w-40 md:w-50 lg:w-60 xl:w-72.5">
+    <div className="page-bg pt-8 pb-13 md:pt-10 md:pb-14 lg:pt-8 lg:pb-16 xl:pt-10 xl:pb-18 min-h-svh">
+      <header className="page-max-w group flex items-start sticky top-0 page-px bg-white z-50 lg:py-4 lg:gap-8 xl:gap-12">
+        <a href="#" className="absolute flex items-center h-12 w-30 lg:static">
           <img src="/images/logo.svg" alt="shortly" className="block w-full" />
-        </h3>
+        </a>
         <PrimaryNav className="grow" />
       </header>
-      <main>
-        <HeroSection className="page-px bg-white pt-4 pb-42" />
-        <ShortenItForm className="page-px absolute inset-x-0 -translate-y-1/2" />
-        <FeaturesSection className="page-px bg-background pt-42 pb-20 sm:pb-22 md:pb-24 lg:pb-42 xl:pb-52" />
-        <section className="cta-bg-image bg-primary-dark page-px py-22 sm:py-20 md:py-18 lg:py-16 xl:py-14">
-          <h2 className="text-center text-[1.75rem] text-white font-bold mb-4">
+      <main className="relative">
+        <HeroSection className="page-px page-max-w bg-white pt-4 pb-42 sm:pt-8 lg:pt-16 lg:pb-37 xl:pt-20" />
+        <ShortenItForm className="page-px page-max-w absolute inset-x-0 -translate-y-1/2" />
+        <div className="bg-background">
+          <FeaturesSection className="page-px page-max-w pt-42 pb-20 sm:pb-22 md:pb-24 lg:pb-42 xl:pb-52 xl:pt-53" />
+        </div>
+        <section className="h-75 cta-bg-image bg-primary-dark page-px flex flex-col justify-center gap-4 py-22 sm:py-20 md:py-18 lg:h-62.5 lg:gap-5 lg:py-16 xl:py-14">
+          <h2 className="text-center text-[1.75rem] text-white font-bold md:text-[2rem] xl:text-[2.5rem]">
             Boost your links today
           </h2>
           <Button className="mx-auto">Get Started</Button>
         </section>
-        <Footer className="page-px pt-13 sm:pt-14 md:pt-15 lg:py-16.5 xl:pt-17.5" />
       </main>
+      <Footer className="page-px page-max-w pt-13 sm:pt-14 md:pt-15 lg:pt-16.5 xl:pt-17.5" />
     </div>
   );
 }

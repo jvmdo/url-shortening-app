@@ -12,10 +12,10 @@ function FeaturesSection({
       className={twMerge("flex flex-col justify-center gap-22", className)}
     >
       <div className="text-center">
-        <h2 className="text-[1.75rem] text-body font-bold mb-6">
+        <h2 className="text-[1.75rem] text-body font-bold mb-6 md:text-[2.125rem] lg:text-[2.5rem]">
           Advanced Statistics
         </h2>
-        <p className="text-muted text-balance">
+        <p className="text-muted mx-auto max-w-[35ch] lg:text-[1.125rem] md:max-w-[45ch]">
           Track how your links are performing across the web with our advanced
           statistics dashboard.
         </p>
