@@ -7,18 +7,25 @@ import ShortenItForm from "@/components/shorten-it-form";
 
 function App() {
   return (
-    <div className="page-bg pt-8 pb-13 md:pt-10 md:pb-14 lg:pt-8 lg:pb-16 xl:pt-10 xl:pb-18 min-h-svh">
+    <div className="page-bg pt-8 pb-13 md:pt-10 md:pb-14 lg:pt-8 lg:pb-16 xl:pt-10 xl:pb-18">
       <header className="page-max-w group flex items-start sticky top-0 page-px bg-white z-50 lg:py-4 lg:gap-8 xl:gap-12">
         <a href="#" className="absolute flex items-center h-12 w-30 lg:static">
           <img src="/images/logo.svg" alt="shortly" className="block w-full" />
         </a>
         <PrimaryNav className="grow" />
       </header>
-      <main className="relative">
-        <HeroSection className="page-px page-max-w bg-white pt-4 pb-42 sm:pt-8 lg:pt-16 lg:pb-37 xl:pt-20" />
-        <ShortenItForm className="page-px page-max-w absolute inset-x-0 -translate-y-1/2" />
+      <main>
+        <HeroSection className="page-px page-max-w bg-white pt-4 pb-22 sm:pt-8 lg:pt-16 lg:pb-17 xl:pt-20" />
         <div className="bg-background">
-          <FeaturesSection className="page-px page-max-w pt-42 pb-20 sm:pb-22 md:pb-24 lg:pb-42 xl:pb-52 xl:pt-53" />
+          <div className="mb-6 bg-linear-to-b from-white from-50% to-background to-50%">
+            <ShortenItForm className="page-px page-max-w" />
+          </div>
+          <div className="page-px page-max-w flex flex-col items-stretch gap-6 lg:gap-4">
+            <div className="h-22 bg-amber-200"></div>
+            <div className="h-22 bg-amber-200"></div>
+            <div className="h-22 bg-amber-200"></div>
+          </div>
+          <FeaturesSection className="page-px page-max-w pt-22 pb-20 sm:pb-22 md:pb-24 lg:pb-42 xl:pb-52 lg:pt-29" />
         </div>
         <section className="h-75 cta-bg-image bg-primary-dark page-px flex flex-col justify-center gap-4 py-22 sm:py-20 md:py-18 lg:h-62.5 lg:gap-5 lg:py-16 xl:py-14">
           <h2 className="text-center text-[1.75rem] text-white font-bold md:text-[2rem] xl:text-[2.5rem]">
