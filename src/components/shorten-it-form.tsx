@@ -5,6 +5,7 @@ import Button from "@/components/button";
 import { Field } from "@base-ui/react/field";
 import { Form } from "@base-ui/react/form";
 import psl from "psl";
+import { toast } from "sonner";
 import z from "zod";
 
 const FormSchema = z.object({
@@ -58,6 +59,25 @@ function ShortenItForm(delegated: ComponentProps<"div">) {
     mutate(url, {
       onSuccess: () => {
         form.reset();
+      },
+      onError(error) {
+        if ("corsError" in error) {
+          toast.error(error.name, {
+            id: "cors-error",
+            description: error.message,
+            action: {
+              label: "Fix now",
+              onClick: () =>
+                window.open("https://cors-anywhere.herokuapp.com/corsdemo"),
+            },
+          });
+          return;
+        }
+
+        toast.error("Links in trouble", {
+          id: "server-error",
+          description: error.message,
+        });
       },
     });
   };

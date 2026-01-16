@@ -2,6 +2,7 @@ import React from "react";
 
 import Button from "@/components/button";
 import { Separator } from "@base-ui/react";
+import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
 interface ShortenLinkCardProps extends React.ComponentProps<"div"> {
@@ -32,12 +33,12 @@ function ShortenLinkCard({
       }, 5000);
 
       intervalIdRef.current = intervalId;
-      console.log(intervalId);
-    } catch (err) {
-      // toast
-      // NotAllowedError DOMException
-      // Thrown if writing to the clipboard is not allowed.
-      console.error("Failed to copy text: ", err);
+    } catch {
+      toast.error("Copy failed", {
+        id: "copy-failed",
+        description:
+          "It seems writing to the clipboard is not allowed on your system",
+      });
     }
   };
 

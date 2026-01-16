@@ -97,7 +97,8 @@ I first solved the most problematic layouts, then I structured and styled the wh
         - Form validation (+1h)
         - HTTP request (+1h because of CORS issue)
         - Query +1h30
-        - ... 11:40 PM
+        - Persist and other things (+1h30)
+        - Toast and errors at 1:40 PM
 
 x. General
     - FIX: space between feature text and cards
@@ -150,11 +151,13 @@ x. General
 
 - Remember: you can use Zod's `refine` to multi-step custom validation. Use `psl` to check for valid Top Level Domain (TLD).
 
-- Tanstack Query's `mutation`
-
-- Tanstack Query's `persisters`
+- Tanstack Query's `mutation` really useful even for a simple POST. I could the API response data in cache which automatically triggers re-render on subscribed components, easing away a lot of pain.
 
 - React's synthetic events are pooled and nullified after the handler completes. You can't use an event after its handling function finished. It happened when I wanted to reset the form in `onSuccess` from `mutate`. The solution? Store a reference to the form: `const form = event.currentTarget`.
+
+- Union + type narrowing for mutually exclusive schemas in Zod.
+
+- Tanstack Query's `persisters` very easy to use for `localStorage`. Install the plugins, define the persister with retry, replace the contexts, configure `maxAge` (must match `gcTime`).
 
 ### Remaining questions
 

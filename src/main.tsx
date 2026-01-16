@@ -1,4 +1,5 @@
 import App from "@/app";
+import { Toaster } from "@/components/ui/sonner";
 import "@/styles.css";
 import { createAsyncStoragePersister } from "@tanstack/query-async-storage-persister";
 import { QueryClient } from "@tanstack/react-query";
@@ -14,7 +15,6 @@ const queryClient = new QueryClient({
     queries: {
       staleTime: Infinity,
       gcTime: 1000 * 60 * 60 * 24, // 24 hours
-      // retry only if error is not cors
     },
   },
 });
@@ -34,6 +34,7 @@ createRoot(document.getElementById("root")!).render(
       }}
     >
       <App />
+      <Toaster />
     </PersistQueryClientProvider>
   </StrictMode>
 );

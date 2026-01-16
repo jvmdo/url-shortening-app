@@ -22,29 +22,45 @@ type TShortenLink = {
 };
 
 const postUrl = async (url: string): Promise<TShortenLink> => {
-  const response = await fetch(
-    "https://cors-anywhere.herokuapp.com/https://cleanuri.com/api/v1/shorten",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+  try {
+    const response = await fetch(
+      "https://cors-anywhere.herokuapp.com/https://cleanuri.com/api/v1/shorten",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `url=${encodeURIComponent(url)}`,
       },
-      body: `url=${encodeURIComponent(url)}`,
+    );
+
+    if (response.status === 403 && response.type === "cors") {
+      throw new TypeError("CORS");
     }
-  );
 
-  const data = await response.json();
-  const parsedData = ApiResponseSchema.parse(data);
+    const data = await response.json();
+    const parsedData = ApiResponseSchema.parse(data);
 
-  if ("error" in parsedData) {
-    throw parsedData.error;
+    if ("error" in parsedData) {
+      throw new Error(parsedData.error);
+    }
+
+    return {
+      id: crypto.randomUUID(),
+      href: url,
+      shorten: parsedData.result_url,
+    };
+  } catch (error) {
+    // CORS error detected
+    if ((error as Error).name === "TypeError") {
+      throw {
+        corsError: true,
+        name: "CORS restrictions",
+        message: "Follow the steps on the CORS Anywhere page, then try again.",
+      };
+    }
+    throw error;
   }
-
-  return {
-    id: crypto.randomUUID(),
-    href: url,
-    shorten: parsedData.result_url,
-  };
 };
 
 export const shortenQueryOptions = () =>
@@ -61,13 +77,8 @@ export function useCreateShorten() {
     mutationFn: postUrl,
     onSuccess(data) {
       queryClient.setQueryData(shortenQueryOptions().queryKey, (oldData) =>
-        oldData ? [data, ...oldData] : [data]
+        oldData ? [data, ...oldData] : [data],
       );
-    },
-    onError(error) {
-      // TODO: show toast for server errors
-      // TODO: heroku iframe?
-      console.error(error);
     },
   });
 }
