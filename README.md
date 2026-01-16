@@ -50,6 +50,65 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ## My process
 
+I first solved the most problematic layouts, then I structured and styled the whole page. Finally, implemented the main functionality.
+
+### Step by step
+
+1. How to build the nav?
+    - I spent 2h wondering how to compose unstyled primitives to build this, considering a11y
+    - 1h spent on the animated hamburger button
+    - 3h tinkering Collapsible + Navigation Menu
+
+2. How to build the hero section?
+    - 3h studying, playing with grid, sizing and magic numbers
+
+3. Funky cards section
+    - Nothing so complicated so far 1h spent
+    - The desktop layout seems tricky though, spent 1h figuring this out
+        - I think subgrid solves this one maybe... +1h
+        - gap is driving me crazy +3h
+
+4. Footer nav
+    - Spent to much time trying out flex stuff (+4h)
+
+5. Setup design tokens in Tailwind
+    - This time, I tried something different: I uploaded the designs and tokens to Claude and asked it to create the semantic tokens, and guess where each one is used. (+ 30 min).
+
+6. Figure out the optimal markup that fits both mobile and desktop designs
+    - header, section, form, section, fotter
+    - The first struggle: logo + [open] collapsible layout (+1h)
+    - +1h for mobile layout and styles
+    - The second struggle: hero section padding conflicts (+1h)
+    - Form: spent 2h on layout + styles
+    - Features section + needed changes = 2h30
+    - Footer +1h
+
+7. Final layout touches
+    - FIX: header/nav on desktop (+30min)
+    - Font sizes, spacing, alignments (+2h30)
+    - Max widths (+30min)
+
+8. Functionality (11 PM)
+    - Error state ---
+    - How to push content down on new URL (+1h30min)
+        - It was a trouble because the form was an absolute box
+    - API Integration
+        - How to proper validate URL (+1h)
+        - Form validation (+1h)
+        - HTTP request (+1h because of CORS issue)
+        - Query +1h30
+        - ... 11:40 PM
+
+x. General
+    - FIX: space between feature text and cards
+    - Create components: header, cta
+    - Get started button should be links
+    - Rename: footer-nav-section, footer-nav-socials
+    - Header shadow when sticked
+    - FIX: push down content not so right when sticky hits
+    - TRY: change hero img sizing approach to make x-clip possible without creating that horizontal space
+        - Maybe increase padding for wider screens is sufficient?
+
 ### Built with
 
 - Semantic HTML5 markup
@@ -65,29 +124,41 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+- `<nav>` should wrap the button of a collapsible navigation menu for accessibility reasons
 
-To see how you can add code snippets, see below:
+- base-ui's `<Collapsible.Panel hiddenUntilFound={true} className="lg:contents">` to pluck the navigation menu out of the panel. CSS only.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
+- Remember: `<img>`, a replaced element, has intrinsic constraints like `max-width: 100%`. That's why they won't resize in some layout contexts! Always reset those properties.
 
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
+- `overflow: clip` is better than `hidden`. Use it on the very parent, not on globally `body` or somewhere else.
 
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+- The subgrid gap mystery: the extra rows created by `row-span-[]` will equally divide the available space when there is a configured `height`. It is not because of the gap.
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+- Remember: `flex-grow` doesn't guarantee that all the items will have the same width. It distributes the extra space proportionally based on `flex-grow` values. Then, add the slice of that extra space to `flex-basis`. Therefore, in order to all the items end up having the same width, `flex-basis` should be `0`.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+- Remember: you cannot directly style an element that appears before the Tailwind's `peer` element in the HTML source order.
+
+- `group-has-data-open:*` works as expected for Base UI's Collapsible.
+
+- In Tailwind v4, interpolate `className` strings won't work. Just use `twMerge` instead.
+
+- `brightness-0 invert` filters change an image to white. In fact, you can change an single solid color image to whatever color you want using a combination of filters.
+
+- How to create multicolor bands background (hard stop gradient): `linear-gradient(to bottom, red 0%, red 50%, blue 50%, blue 100%)`. You can create an utility for that or use Tailwind directly: `bg-linear-to-b from-red from-50% to-blue to-50%`.
+
+- It seems `contents` approach is preferable for unstyled containers.
+
+- Remember: you can use Zod's `refine` to multi-step custom validation. Use `psl` to check for valid Top Level Domain (TLD).
+
+- Tanstack Query's `mutation`
+
+- Tanstack Query's `persisters`
+
+- React's synthetic events are pooled and nullified after the handler completes. You can't use an event after its handling function finished. It happened when I wanted to reset the form in `onSuccess` from `mutate`. The solution? Store a reference to the form: `const form = event.currentTarget`.
+
+### Remaining questions
+
+- The `contents` approach is too good to be true! Maybe some a11y issues is introduced?
 
 ### Continued development
 
@@ -96,6 +167,11 @@ Use this section to outline areas that you want to continue focusing on in futur
 **Note: Delete this note and the content within this section and replace with your own plans for continued development.**
 
 ### Useful resources
+
+<https://codepen.io/farnous/pen/abEbwMd>
+<https://ishadeed.com/article/display-contents/>
+<https://kilianvalkhof.com/2022/css-html/do-you-know-about-overflow-clip/>
+<https://stackoverflow.com/a/23675095/21858786> - Resize image keep aspect ratio?
 
 - [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
 - [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.

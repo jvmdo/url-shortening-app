@@ -3,7 +3,7 @@ import FeaturesSection from "@/components/features-section";
 import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
 import PrimaryNav from "@/components/primary-nav";
-import ShortenItForm from "@/components/shorten-it-form";
+import ShortenLinksSection from "@/components/shorten-links-section";
 
 function App() {
   return (
@@ -17,14 +17,7 @@ function App() {
       <main>
         <HeroSection className="page-px page-max-w bg-white pt-4 pb-22 sm:pt-8 lg:pt-16 lg:pb-17 xl:pt-20" />
         <div className="bg-background">
-          <div className="mb-6 bg-linear-to-b from-white from-50% to-background to-50%">
-            <ShortenItForm className="page-px page-max-w" />
-          </div>
-          <div className="page-px page-max-w flex flex-col items-stretch gap-6 lg:gap-4">
-            <div className="h-22 bg-amber-200"></div>
-            <div className="h-22 bg-amber-200"></div>
-            <div className="h-22 bg-amber-200"></div>
-          </div>
+          <ShortenLinksSection />
           <FeaturesSection className="page-px page-max-w pt-22 pb-20 sm:pb-22 md:pb-24 lg:pb-42 xl:pb-52 lg:pt-29" />
         </div>
         <section className="h-75 cta-bg-image bg-primary-dark page-px flex flex-col justify-center gap-4 py-22 sm:py-20 md:py-18 lg:h-62.5 lg:gap-5 lg:py-16 xl:py-14">

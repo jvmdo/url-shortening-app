@@ -1,30 +1,73 @@
 import React, { type ComponentProps } from "react";
 
+import { useCreateShorten } from "@/api";
 import Button from "@/components/button";
 import { Field } from "@base-ui/react/field";
 import { Form } from "@base-ui/react/form";
+import psl from "psl";
+import z from "zod";
 
-function ShortenItForm({ className, ...delegated }: ComponentProps<"div">) {
+const FormSchema = z.object({
+  url: z
+    .string()
+    .min(1, { error: "Please add a link", abort: true })
+    .refine(URL.canParse, {
+      error: "Invalid URL structure. Include protocol and domain extension.",
+      abort: true,
+    })
+    .transform((value) => new URL(value))
+    .refine((url) => ["http:", "https:"].includes(url.protocol), {
+      error: "Only HTTP/HTTPS protocols are supported.",
+      abort: true,
+    })
+    .refine((url) => psl.isValid(url.hostname), {
+      error: "URL must have a valid domain extension (e.g., .com).",
+    })
+    .transform(String),
+});
+
+function validateForm(formValues: Form.Values) {
+  const fieldValidate = FormSchema.safeParse(formValues);
+
+  if (!fieldValidate.success) {
+    return {
+      errors: z.flattenError(fieldValidate.error).fieldErrors,
+    };
+  }
+
+  return {
+    url: fieldValidate.data.url,
+  };
+}
+
+function ShortenItForm(delegated: ComponentProps<"div">) {
   const [errors, setErrors] = React.useState({});
-  const [loading, setLoading] = React.useState(false);
+  const { mutate, isPending } = useCreateShorten();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formValues = new FormData(form);
+    const { errors, url } = validateForm(Object.fromEntries(formValues));
+
+    if (errors) {
+      return setErrors(errors);
+    }
+
+    mutate(url, {
+      onSuccess: () => {
+        form.reset();
+      },
+    });
+  };
 
   return (
-    <div {...delegated} className={className}>
+    <div {...delegated}>
       <Form
         className="w-full p-6 flex flex-wrap gap-y-4 gap-x-6 rounded-lg form-bg-image bg-primary-dark sm:p-8 md:p-10 lg:px-14 lg:py-12 xl:px-16 xl:py-13"
         errors={errors}
-        onSubmit={async (event) => {
-          event.preventDefault();
-          const formData = new FormData(event.currentTarget);
-          const value = formData.get("url") as string;
-          setLoading(true);
-          const response = await submitForm(value);
-          const serverErrors = {
-            url: response.error,
-          };
-          setErrors(serverErrors);
-          setLoading(false);
-        }}
+        onSubmit={handleSubmit}
       >
         <Field.Root
           name="url"
@@ -32,42 +75,21 @@ function ShortenItForm({ className, ...delegated }: ComponentProps<"div">) {
         >
           <Field.Control
             type="url"
-            required
             placeholder="Shorten a link here..."
-            pattern="https?://.*"
-            className="w-full h-12 pl-4 rounded-md bg-white placeholder:text-muted placeholder:text-sm sm:h-13 md:h-14 lg:h-15 lg:rounded-lg xl:h-16"
+            className="w-full h-12 pl-4 rounded-md bg-white placeholder:text-muted placeholder:text-sm sm:h-13 md:h-14 lg:h-15 lg:rounded-lg lg:placeholder:text-base xl:h-16 data-invalid:outline-error data-invalid:placeholder-error"
           />
-          <Field.Error className="text-sm text-red-800" />
+          <Field.Error className="text-sm text-error" />
         </Field.Root>
         <Button
           type="submit"
-          disabled={loading}
-          className="grow basis-25 h-12 text-base rounded-md data-disabled:text-gray-500 sm:h-13 md:h-14 lg:h-15 lg:rounded-lg xl:h-16"
+          disabled={isPending}
+          className="grow basis-25 h-12 text-base rounded-md sm:h-13 md:h-14 lg:h-15 lg:text-xl lg:rounded-lg xl:h-16"
         >
           Shorten It!
         </Button>
       </Form>
     </div>
   );
-}
-
-async function submitForm(value: string) {
-  // Mimic a server response
-  await new Promise((resolve) => {
-    setTimeout(resolve, 1000);
-  });
-
-  try {
-    const url = new URL(value);
-
-    if (url.hostname.endsWith("example.com")) {
-      return { error: "The example domain is not allowed" };
-    }
-  } catch {
-    return { error: "This is not a valid URL" };
-  }
-
-  return { success: true };
 }
 
 export default ShortenItForm;
