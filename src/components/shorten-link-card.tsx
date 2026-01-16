@@ -1,7 +1,6 @@
 import React from "react";
 
 import Button from "@/components/button";
-import { Separator } from "@base-ui/react";
 import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
@@ -16,7 +15,7 @@ function ShortenLinkCard({
   className,
   ...delegated
 }: ShortenLinkCardProps) {
-  const [btnText, setBtnText] = React.useState<"copy" | "copied">("copy");
+  const [btnText, setBtnText] = React.useState<"copy" | "copied!">("copy");
   const intervalIdRef = React.useRef<number | null>(null);
 
   const handleCopyToClipboard = async () => {
@@ -26,7 +25,7 @@ function ShortenLinkCard({
       }
 
       await navigator.clipboard.writeText(shorten);
-      setBtnText("copied");
+      setBtnText("copied!");
 
       const intervalId = setInterval(() => {
         setBtnText("copy");
@@ -42,24 +41,32 @@ function ShortenLinkCard({
     }
   };
 
-  const isCopied = btnText === "copied";
+  const isCopied = btnText === "copied!";
 
   return (
     <div
       {...delegated}
-      className={twMerge("flex flex-col gap-6 rounded-lg bg-white", className)}
+      className={twMerge(
+        "flex flex-col gap-3 rounded-lg bg-white md:flex-row md:items-center md:py-4 md:text-xl",
+        className
+      )}
     >
-      <p>{href}</p>
-      <Separator orientation="horizontal" />
-      <strong>{shorten}</strong>
-      <Button
-        type="button"
-        className="capitalize disabled:bg-primary-dark!"
-        disabled={isCopied}
-        onClick={handleCopyToClipboard}
-      >
-        {btnText}
-      </Button>
+      <div className="p-4 pb-3 border-b border-b-background md:p-0 md:pl-8 md:border-none md:flex-1 md:min-w-0">
+        <p className="truncate">{href}</p>
+      </div>
+      <div className="px-4 pb-4 md:p-0 md:pr-8 md:flex md:gap-4 md:items-center md:shrink-0">
+        <strong className="mb-3 font-medium text-primary block md:mb-0">
+          {shorten}
+        </strong>
+        <Button
+          type="button"
+          className="w-full h-10 rounded-lg text-base capitalize disabled:bg-primary-dark! md:w-24 md:shrink-0"
+          disabled={isCopied}
+          onClick={handleCopyToClipboard}
+        >
+          {btnText}
+        </Button>
+      </div>
     </div>
   );
 }
