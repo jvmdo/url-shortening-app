@@ -2,6 +2,7 @@ import { type ComponentProps } from "react";
 
 import { useShorten } from "@/api";
 import ShortenLinkCard from "@/components/shorten-link-card";
+import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 
 function ShortenLinkList({ className, ...delegated }: ComponentProps<"ul">) {
@@ -16,13 +17,18 @@ function ShortenLinkList({ className, ...delegated }: ComponentProps<"ul">) {
       {...delegated}
       className={twMerge(
         "flex flex-col items-stretch gap-6 lg:gap-4",
-        className
+        className,
       )}
     >
       {data.map(({ id, ...link }) => (
-        <li key={id}>
+        <motion.li
+          key={id}
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          transition={{ type: "tween" }}
+        >
           <ShortenLinkCard {...link} />
-        </li>
+        </motion.li>
       ))}
     </ul>
   );
