@@ -1,6 +1,7 @@
-import React from "react";
+import React, { type ReactNode } from "react";
 
 import Button from "@/components/button";
+import { motion } from "motion/react";
 import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
@@ -56,9 +57,7 @@ function ShortenLinkCard({
         <p className="truncate">{href}</p>
       </div>
       <div className="px-4 pb-4 md:p-0 md:pr-8 md:flex md:gap-4 md:items-center md:shrink-0">
-        <strong className="mb-3 font-medium text-primary block md:mb-0">
-          {shorten}
-        </strong>
+        <ShinyLink isOptimistic={isOptimistic}>{shorten}</ShinyLink>
         <Button
           type="button"
           className="w-full h-10 rounded-lg text-base capitalize disabled:bg-primary-dark! md:w-24 md:shrink-0"
@@ -73,3 +72,35 @@ function ShortenLinkCard({
 }
 
 export default ShortenLinkCard;
+
+function ShinyLink({
+  children,
+  isOptimistic,
+}: {
+  children: ReactNode;
+  isOptimistic: boolean;
+}) {
+  return (
+    <motion.strong
+      className="mb-3 font-medium block md:mb-0"
+      initial={{ color: "var(--color-muted)" }}
+      animate={
+        isOptimistic
+          ? {}
+          : {
+              color: [
+                "var(--color-primary)",
+                "var(--color-glow)",
+                "var(--color-primary)",
+              ],
+            }
+      }
+      transition={{
+        duration: 1,
+        ease: [0.16, 1, 0.3, 1],
+      }}
+    >
+      {children}
+    </motion.strong>
+  );
+}

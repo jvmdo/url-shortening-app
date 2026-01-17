@@ -56,6 +56,7 @@
   --color-white: hsl(0, 0%, 100%);
 
   --color-primary-hover: hsl(from var(--color-primary) h s calc(l + 25));
+  --color-glow: hsl(45, 100%, 70%);
 }
 
 @utility form-bg-image {

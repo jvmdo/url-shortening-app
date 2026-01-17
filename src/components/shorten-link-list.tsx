@@ -2,10 +2,13 @@ import { type ComponentProps } from "react";
 
 import { useShorten } from "@/api";
 import ShortenLinkCard from "@/components/shorten-link-card";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
 
-function ShortenLinkList({ className, ...delegated }: ComponentProps<"ul">) {
+function ShortenLinkList({
+  className,
+  ...delegated
+}: ComponentProps<typeof motion.ul>) {
   const { data } = useShorten();
 
   if (!data) {
@@ -13,24 +16,31 @@ function ShortenLinkList({ className, ...delegated }: ComponentProps<"ul">) {
   }
 
   return (
-    <ul
+    <motion.ul
       {...delegated}
       className={twMerge(
-        "flex flex-col items-stretch gap-6 lg:gap-4",
+        "flex flex-col items-stretch [--gap:1.5rem] lg:[--gap:1rem]",
         className,
       )}
+      layout={true}
+      initial={{ gap: 0 }}
+      animate={{ gap: "var(--gap)" }}
     >
-      {data.map(({ id, ...link }) => (
-        <motion.li
-          key={id}
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          transition={{ type: "tween" }}
-        >
-          <ShortenLinkCard {...link} />
-        </motion.li>
-      ))}
-    </ul>
+      <AnimatePresence>
+        {data.map((link) => (
+          <motion.li
+            key={link.id}
+            layout="position"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0, scale: 0 }}
+            transition={{ type: "tween" }}
+          >
+            <ShortenLinkCard {...link} />
+          </motion.li>
+        ))}
+      </AnimatePresence>
+    </motion.ul>
   );
 }
 
