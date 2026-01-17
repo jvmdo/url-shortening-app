@@ -21,7 +21,10 @@ type TShortenLink = {
   shorten: string;
 };
 
-const postUrl = async (url: string): Promise<TShortenLink> => {
+const createShorten = async ({
+  id,
+  href,
+}: Omit<TShortenLink, "shorten">): Promise<TShortenLink> => {
   try {
     const response = await fetch(
       "https://cors-anywhere.herokuapp.com/https://cleanuri.com/api/v1/shorten",
@@ -30,7 +33,7 @@ const postUrl = async (url: string): Promise<TShortenLink> => {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: `url=${encodeURIComponent(url)}`,
+        body: `url=${encodeURIComponent(href)}`,
       },
     );
 
@@ -46,8 +49,8 @@ const postUrl = async (url: string): Promise<TShortenLink> => {
     }
 
     return {
-      id: crypto.randomUUID(),
-      href: url,
+      id,
+      href,
       shorten: parsedData.result_url,
     };
   } catch (error) {
@@ -66,7 +69,7 @@ const postUrl = async (url: string): Promise<TShortenLink> => {
 export const shortenQueryOptions = () =>
   queryOptions({
     queryKey: ["shorten"],
-    queryFn: async () => [await postUrl("")],
+    queryFn: async () => [await createShorten({ id: "", href: "" })],
     enabled: false,
   });
 
@@ -74,11 +77,27 @@ export function useCreateShorten() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postUrl,
-    onSuccess(data) {
+    mutationFn: createShorten,
+    onMutate({ id, href }) {
+      const optimisticData: TShortenLink = {
+        id,
+        href,
+        shorten: "https://cleanuri.com/******",
+      };
       queryClient.setQueryData(shortenQueryOptions().queryKey, (oldData) =>
-        oldData ? [data, ...oldData] : [data],
+        oldData ? [optimisticData, ...oldData] : [optimisticData],
       );
+    },
+    onSuccess(newLink) {
+      queryClient.setQueryData(shortenQueryOptions().queryKey, (oldData) => {
+        const data = oldData?.filter(({ id }) => id !== newLink.id);
+        return data ? [newLink, ...data] : [newLink];
+      });
+    },
+    onError(_, variables) {
+      queryClient.setQueryData(shortenQueryOptions().queryKey, (oldData) => {
+        return oldData?.filter(({ id }) => id !== variables.id);
+      });
     },
   });
 }

@@ -42,13 +42,14 @@ function ShortenLinkCard({
   };
 
   const isCopied = btnText === "copied!";
+  const isOptimistic = shorten.endsWith("***");
 
   return (
     <div
       {...delegated}
       className={twMerge(
         "flex flex-col gap-3 rounded-lg bg-white md:flex-row md:items-center md:py-4 md:text-xl",
-        className
+        className,
       )}
     >
       <div className="p-4 pb-3 border-b border-b-background md:p-0 md:pl-8 md:border-none md:flex-1 md:min-w-0">
@@ -61,7 +62,7 @@ function ShortenLinkCard({
         <Button
           type="button"
           className="w-full h-10 rounded-lg text-base capitalize disabled:bg-primary-dark! md:w-24 md:shrink-0"
-          disabled={isCopied}
+          disabled={isCopied || isOptimistic}
           onClick={handleCopyToClipboard}
         >
           {btnText}

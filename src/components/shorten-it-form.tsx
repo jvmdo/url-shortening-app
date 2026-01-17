@@ -56,30 +56,33 @@ function ShortenItForm(delegated: ComponentProps<"div">) {
       return setErrors(errors);
     }
 
-    mutate(url, {
-      onSuccess: () => {
-        form.reset();
-      },
-      onError(error) {
-        if ("corsError" in error) {
-          toast.error(error.name, {
-            id: "cors-error",
-            description: error.message,
-            action: {
-              label: "Fix now",
-              onClick: () =>
-                window.open("https://cors-anywhere.herokuapp.com/corsdemo"),
-            },
-          });
-          return;
-        }
+    mutate(
+      { id: crypto.randomUUID(), href: url },
+      {
+        onSuccess: () => {
+          form.reset();
+        },
+        onError(error) {
+          if ("corsError" in error) {
+            toast.error(error.name, {
+              id: "cors-error",
+              description: error.message,
+              action: {
+                label: "Fix now",
+                onClick: () =>
+                  window.open("https://cors-anywhere.herokuapp.com/corsdemo"),
+              },
+            });
+            return;
+          }
 
-        toast.error("Links in trouble", {
-          id: "server-error",
-          description: error.message,
-        });
+          toast.error("Links in trouble", {
+            id: "server-error",
+            description: error.message,
+          });
+        },
       },
-    });
+    );
   };
 
   return (
