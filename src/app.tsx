@@ -14,15 +14,21 @@ function App() {
   return (
     <div className="min-h-svh page-bg overflow-x-clip pt-8 pb-13 md:pt-10 md:pb-14 lg:pt-8 lg:pb-16 xl:pt-10 xl:pb-18">
       <div ref={ref}></div>
-      <header
+      <div
+        className="group sticky top-0 z-50 bg-white data-stuck:shadow-xl transition-shadow"
         data-stuck={!entry?.isIntersecting || undefined}
-        className="group page-max-w page-px z-50 min-h-12 flex items-center sticky top-0 bg-white transition-all data-stuck:shadow-xl data-stuck:min-h-16 lg:py-4 lg:gap-8 xl:gap-12"
       >
-        <a href="#" className="absolute flex items-center w-30 lg:static">
-          <img src="/images/logo.svg" alt="shortly" className="block w-full" />
-        </a>
-        <PrimaryNav className="grow" />
-      </header>
+        <header className="page-max-w page-px min-h-12 flex items-center transition-all group-data-stuck:min-h-16 lg:py-4 lg:gap-8 xl:gap-12">
+          <a href="#" className="w-30">
+            <img
+              src="/images/logo.svg"
+              alt="shortly"
+              className="block w-full"
+            />
+          </a>
+          <PrimaryNav className="grow" />
+        </header>
+      </div>
       <main>
         <HeroSection className="page-px page-max-w bg-white pt-4 pb-22 sm:pt-8 lg:pt-16 lg:pb-17 xl:pt-20" />
         <div className="bg-background">
