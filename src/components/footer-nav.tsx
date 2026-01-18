@@ -1,8 +1,10 @@
 import React from "react";
 
-import NavSection, { type NavSectionProps } from "@/components/nav-section";
-import type { NavSocialsProps } from "@/components/nav-socials";
-import NavSocials from "@/components/nav-socials";
+import NavSection, {
+  type NavSectionProps,
+} from "@/components/footer-nav-section";
+import type { NavSocialsProps } from "@/components/footer-nav-socials";
+import NavSocials from "@/components/footer-nav-socials";
 
 const navItems: NavSectionProps[] = [
   {
