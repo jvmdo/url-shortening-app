@@ -10,6 +10,24 @@
     a {
       @apply transition-colors duration-200 ease-in-out;
     }
+
+    --page-px: 1.5rem;
+
+    @media screen and (min-width: 640px) {
+      --page-px: 3rem;
+    }
+
+    @media screen and (min-width: 768px) {
+      --page-px: 3.5rem;
+    }
+
+    @media screen and (min-width: 1024px) {
+      --page-px: 7.5rem;
+    }
+
+    @media screen and (min-width: 1280px) {
+      --page-px: 10.625rem;
+    }
   }
 
   body {
@@ -83,25 +101,11 @@
 }
 
 @utility page-px {
-  --px: 1.5rem;
+  padding-inline: var(--page-px);
+}
 
-  @media screen and (min-width: 640px) {
-    --px: 3rem;
-  }
-
-  @media screen and (min-width: 768px) {
-    --px: 3.5rem;
-  }
-
-  @media screen and (min-width: 1024px) {
-    --px: 7.5rem;
-  }
-
-  @media screen and (min-width: 1280px) {
-    --px: 10.625rem;
-  }
-
-  padding-inline: var(--px);
+@utility inset-ppx {
+  inset-inline: var(--page-px);
 }
 
 @utility icon-primary {

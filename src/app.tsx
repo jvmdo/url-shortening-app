@@ -16,9 +16,9 @@ function App() {
       <div ref={ref}></div>
       <header
         data-stuck={!entry?.isIntersecting || undefined}
-        className="group page-max-w page-px z-50 flex items-start sticky top-0 bg-white transition-shadow data-stuck:shadow-xl lg:py-4 lg:gap-8 xl:gap-12"
+        className="group page-max-w page-px z-50 min-h-12 flex items-center sticky top-0 bg-white transition-all data-stuck:shadow-xl data-stuck:min-h-16 lg:py-4 lg:gap-8 xl:gap-12"
       >
-        <a href="#" className="absolute flex items-center h-12 w-30 lg:static">
+        <a href="#" className="absolute flex items-center w-30 lg:static">
           <img src="/images/logo.svg" alt="shortly" className="block w-full" />
         </a>
         <PrimaryNav className="grow" />

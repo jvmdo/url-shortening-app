@@ -14,14 +14,14 @@ function PrimaryNav(props: ComponentProps<typeof NavigationMenu.Root>) {
   return (
     <NavigationMenu.Root {...props}>
       <Collapsible.Root className="flex flex-col w-full">
-        <Collapsible.Trigger className="relative group self-end lg:hidden">
+        <Collapsible.Trigger className="group self-end lg:hidden">
           <AnimatedHamburgerIcon />
         </Collapsible.Trigger>
         <Collapsible.Panel
           hiddenUntilFound={true}
-          className="h-(--collapsible-panel-height) flex flex-col justify-end overflow-hidden transition-all ease-out data-ending-style:h-0 data-starting-style:h-0 duration-150 lg:contents data-open:mb-4"
+          className="h-(--collapsible-panel-height) absolute top-15 inset-ppx flex flex-col group-data-stuck:top-20 data-ending-style:h-0 data-starting-style:h-0 overflow-hidden transition-all ease-initial duration-150 shadow-lg shadow-primary-hover lg:contents"
         >
-          <NavigationMenu.List className="mt-4 px-6 py-8 flex flex-col gap-8 rounded-lg text-center text-white font-bold bg-primary-dark lg:flex-row lg:items-center lg:mt-0 lg:py-0 lg:text-muted lg:bg-transparent">
+          <NavigationMenu.List className="px-6 py-8 flex flex-col gap-8 rounded-lg text-center text-white font-bold bg-primary-dark lg:flex-row lg:items-center lg:mt-0 lg:py-0 lg:text-muted lg:bg-transparent max-lg:landscape:gap-4">
             {navItems.map(({ title, href }) => (
               <NavigationMenu.Item key={title}>
                 <NavigationMenu.Link href={href} className="hover:text-primary">
