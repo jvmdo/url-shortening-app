@@ -6,7 +6,9 @@ function Cta() {
       <h2 className="text-center text-[1.75rem] text-white font-bold md:text-[2rem] xl:text-[2.5rem]">
         Boost your links today
       </h2>
-      <Button className="mx-auto">Get Started</Button>
+      <Button asLink={true} href="#shorten" className="mx-auto">
+        Get Started
+      </Button>
     </section>
   );
 }

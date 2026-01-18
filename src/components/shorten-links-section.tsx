@@ -4,7 +4,7 @@ import { VisuallyHidden } from "radix-ui";
 
 function ShortenLinksSection() {
   return (
-    <section>
+    <section id="shorten">
       <VisuallyHidden.Root>
         <h2>Try it out</h2>
         <p>Enter the link you want to shorten in the form</p>

@@ -7,7 +7,7 @@ function HeroSection(delegated: ComponentProps<"div">) {
       {/* 40% is a magic number that makes <img/> matches its position in design */}
       <section className="md:grid md:items-center md:gap-6 md:grid-cols-[auto_40%] lg:gap-10 xl:gap-12">
         {/* 132vw is a magic number that makes <img/> matches its size in design */}
-        <div className="w-[132vw] mx-auto md:max-w-none md:order-2 md:justify-self-auto">
+        <div className="w-[132vw] mx-auto md:max-w-none max-md:max-w-123.75 md:order-2 md:justify-self-auto">
           <img
             src="/images/illustration-working.svg"
             alt="Illustration of a man working from home on his desk with a computer"
@@ -23,7 +23,13 @@ function HeroSection(delegated: ComponentProps<"div">) {
               your links are performing.
             </p>
           </hgroup>
-          <Button className="mx-auto md:mx-0 xl:mb-12">Get Started</Button>
+          <Button
+            asLink={true}
+            href="#shorten"
+            className="mx-auto md:mx-0 xl:mb-12"
+          >
+            Get Started
+          </Button>
         </div>
       </section>
     </div>

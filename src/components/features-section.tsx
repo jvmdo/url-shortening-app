@@ -9,7 +9,10 @@ function FeaturesSection({
   return (
     <section
       {...delegated}
-      className={twMerge("flex flex-col justify-center gap-22", className)}
+      className={twMerge(
+        "flex flex-col justify-center gap-22 lg:gap-25",
+        className,
+      )}
     >
       <div className="text-center">
         <h2 className="text-[1.75rem] text-body font-bold mb-6 md:text-[2.125rem] lg:text-[2.5rem]">
