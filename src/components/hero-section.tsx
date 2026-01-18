@@ -1,17 +1,13 @@
 import Button from "@/components/button";
 import type { ComponentProps } from "react";
-import { twMerge } from "tailwind-merge";
 
-function HeroSection({ className, ...delegated }: ComponentProps<"div">) {
+function HeroSection(delegated: ComponentProps<"div">) {
   return (
-    <div
-      {...delegated}
-      className={twMerge("overflow-x-clip overflow-y-visible", className)}
-    >
+    <div {...delegated}>
       {/* 40% is a magic number that makes <img/> matches its position in design */}
       <section className="md:grid md:items-center md:gap-6 md:grid-cols-[auto_40%] lg:gap-10 xl:gap-12">
         {/* 132vw is a magic number that makes <img/> matches its size in design */}
-        <div className="w-[132vw] max-w-150 mx-auto md:max-w-none md:order-2 md:justify-self-auto">
+        <div className="w-[132vw] mx-auto md:max-w-none md:order-2 md:justify-self-auto">
           <img
             src="/images/illustration-working.svg"
             alt="Illustration of a man working from home on his desk with a computer"
