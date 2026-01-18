@@ -4,11 +4,20 @@ import Footer from "@/components/footer";
 import HeroSection from "@/components/hero-section";
 import PrimaryNav from "@/components/primary-nav";
 import ShortenLinksSection from "@/components/shorten-links-section";
+import { useIntersectionObserver } from "@uidotdev/usehooks";
 
 function App() {
+  const [ref, entry] = useIntersectionObserver({
+    threshold: 1,
+  });
+
   return (
     <div className="min-h-svh page-bg overflow-x-clip pt-8 pb-13 md:pt-10 md:pb-14 lg:pt-8 lg:pb-16 xl:pt-10 xl:pb-18">
-      <header className="page-max-w group flex items-start sticky top-0 page-px bg-white z-50 lg:py-4 lg:gap-8 xl:gap-12">
+      <div ref={ref}></div>
+      <header
+        data-stuck={!entry?.isIntersecting || undefined}
+        className="group page-max-w page-px z-50 flex items-start sticky top-0 bg-white transition-shadow data-stuck:shadow-xl lg:py-4 lg:gap-8 xl:gap-12"
+      >
         <a href="#" className="absolute flex items-center h-12 w-30 lg:static">
           <img src="/images/logo.svg" alt="shortly" className="block w-full" />
         </a>
