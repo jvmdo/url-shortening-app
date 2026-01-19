@@ -4,19 +4,20 @@ This is a solution to the [Shortly URL shortening API Challenge challenge on Fro
 
 ## Table of contents
 
+> [!WARNING]
+> Requests to CleanURI API are CORS blocked. I workaround that using Heroku's CORS Anywhere.
+
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
+  - [Screencast](#screencast)
+  - [Live preview](#live-preview)
 - [My process](#my-process)
+  - [Step-by-step](#step-by-step)
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
+  - [Remaining questions](#remaining-questions)
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
-- [Author](#author)
-- [Acknowledgments](#acknowledgments)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -31,26 +32,47 @@ Users should be able to:
 - Receive an error message when the `form` is submitted if:
   - The `input` field is empty
 
-### Screenshot
+### Beyond the challenge (extra features)
 
-![](./screenshot.jpg)
+- Sticky header
+- Animations
 
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
+### Screencast
 
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
+![WYSIWYG](./screencast.gif)
 
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
+#### What is recorded
 
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+- Responsiveness
+  - For each page section, resize the simulated device from **320px to 1440px**
+  - For each breakpoint (375px, 768px, 1440px):
+    - Display the main navigation in both orientations
+    - Display the entire page
+- Responsiveness (browser zoom out)
+- Functionalities
+  - Page scroll when clicking on links
+  - Hover states
+  - Form validation:
+    - Empty
+    - Missing protocol
+    - Invalid protocol
+    - Invalid TLD
+  - Error handling:
+    - CORS
+    - Unsupported domain
+  - Link creation:
+    - YouTube.com, Twitch.tv, Minecraft.net
+  - Link copying
+  - Cache persistence
 
-### Links
+### Live preview
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [App on Netlify](https://url-shortening-jvmdo.netlify.app)
+- Solution URL: [Solution on FrontendMentor](https://www.frontendmentor.io/solutions/responsive-nav-menu-using-base-ui-primitives-QVO4aXQg3s)
 
 ## My process
 
-I first solved the most problematic layouts, then I structured and styled the whole page. Finally, implemented the main functionality.
+I first solved the most problematic layouts, then I structured and styled the whole page. Finally, implemented the main functionality. Moreover, added beyond the challenge features and small fixes.
 
 ### Step by step
 
@@ -60,7 +82,7 @@ I first solved the most problematic layouts, then I structured and styled the wh
     - 3h tinkering Collapsible + Navigation Menu
 
 2. How to build the hero section?
-    - 3h studying, playing with grid, sizing and magic numbers
+    - 3h studying, playing with grid, sizings and magic numbers
 
 3. Funky cards section
     - Nothing so complicated so far 1h spent
@@ -69,13 +91,13 @@ I first solved the most problematic layouts, then I structured and styled the wh
         - gap is driving me crazy +3h
 
 4. Footer nav
-    - Spent to much time trying out flex stuff (+4h)
+    - Spent too much time trying out flex stuff (+4h)
 
 5. Setup design tokens in Tailwind
-    - This time, I tried something different: I uploaded the designs and tokens to Claude and asked it to create the semantic tokens, and guess where each one is used. (+ 30 min).
+    - This time, I tried something different: I uploaded the designs and tokens to Claude and asked it to create the semantic tokens, and guess where each one is used. (+30min)
 
 6. Figure out the optimal markup that fits both mobile and desktop designs
-    - header, section, form, section, fotter
+    - header, section, form, section, foter
     - The first struggle: logo + [open] collapsible layout (+1h)
     - +1h for mobile layout and styles
     - The second struggle: hero section padding conflicts (+1h)
@@ -88,8 +110,8 @@ I first solved the most problematic layouts, then I structured and styled the wh
     - Font sizes, spacing, alignments (+2h30)
     - Max widths (+30min)
 
-8. Functionality (11 PM)
-    - Error state ---
+8. Functionality
+    - Error state
     - How to push content down on new URL (+1h30min)
         - It was a trouble because the form was an absolute box
     - API Integration
@@ -99,29 +121,29 @@ I first solved the most problematic layouts, then I structured and styled the wh
         - Query +1h30
         - Persist and other things (+1h30)
         - Toast and errors at 1:40 PM
+            - Toast and errors (+2h)
+    - card styles (+1h)
 
-x. General
-    - FIX: space between feature text and cards
-    - Create components: header, cta
-    - Get started button should be links
-    - Rename: footer-nav-section, footer-nav-socials
-    - Header shadow when sticked
-    - FIX: push down content not so right when sticky hits
-    - TRY: change hero img sizing approach to make x-clip possible without creating that horizontal space
-        - Maybe increase padding for wider screens is sufficient?
+9. Animations
+    - The snap gap episode (+3h30min)
+
+10. Optimistic mutation +30min
+
+11. Ele brinca ele
+    - Header shadow box +2h
+        - IntersectionObserver and sticky elements aren't friends!
+    - Small fixes +3h
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- React.js
+- TailwindCSS
+- Base UI
+- Tanstack Query
+- Zod
+- Sonner
+- Motion
+- CSS `subgrid` 😮
 
 ### What I learned
 
@@ -131,66 +153,66 @@ x. General
 
 - Remember: `<img>`, a replaced element, has intrinsic constraints like `max-width: 100%`. That's why they won't resize in some layout contexts! Always reset those properties.
 
-- `overflow: clip` is better than `hidden`. Use it on the very parent, not on globally `body` or somewhere else.
+- `overflow: clip` is better than `hidden`. Use it on the very parent, not on global elements like `body`.
 
-- The subgrid gap mystery: the extra rows created by `row-span-[]` will equally divide the available space when there is a configured `height`. It is not because of the gap.
+- The subgrid gap mystery: the extra rows created by `row-span-[]` will equally divide the available space when there is a configured `height`. It wasn't because of the gap 🤭.
 
-- Remember: `flex-grow` doesn't guarantee that all the items will have the same width. It distributes the extra space proportionally based on `flex-grow` values. Then, add the slice of that extra space to `flex-basis`. Therefore, in order to all the items end up having the same width, `flex-basis` should be `0`.
+- Remember: `flex-grow` doesn't guarantee that all the items will have the same width. It distributes the extra space proportionally based on growth values then it adds the slice of that extra space to `flex-basis`. Therefore, in order to all the items end up having the same width, `flex-basis` should be `0`.
 
 - Remember: you cannot directly style an element that appears before the Tailwind's `peer` element in the HTML source order.
 
-- `group-has-data-open:*` works as expected for Base UI's Collapsible.
+- Use `group-data-open:*` when the group element itself has owns the `data` attribute. Use `group-has-data-open:*` when any descendant of the group owns the target attribute.
 
 - In Tailwind v4, interpolate `className` strings won't work. Just use `twMerge` instead.
 
 - `brightness-0 invert` filters change an image to white. In fact, you can change an single solid color image to whatever color you want using a combination of filters.
 
-- How to create multicolor bands background (hard stop gradient): `linear-gradient(to bottom, red 0%, red 50%, blue 50%, blue 100%)`. You can create an utility for that or use Tailwind directly: `bg-linear-to-b from-red from-50% to-blue to-50%`.
+- How to create multicolor bands background (hard stop gradient): `linear-gradient(to bottom, red 50%, blue 50%)`. You can create an utility for that or use Tailwind directly: `bg-linear-to-b from-red from-50% to-blue to-50%`.
 
-- It seems `contents` approach is preferable for unstyled containers.
+- Remember: you can use Zod's `refine` to multi-step custom validation.
 
-- Remember: you can use Zod's `refine` to multi-step custom validation. Use `psl` to check for valid Top Level Domain (TLD).
+- `psl` package to check for valid Top Level Domain (TLD).
 
-- Tanstack Query's `mutation` really useful even for a simple POST. I could the API response data in cache which automatically triggers re-render on subscribed components, easing away a lot of pain.
+- Tanstack Query's `mutation` really useful even for a simple POST. You can `setQueryData` which automatically triggers re-render on subscribed components, easing away a lot of pain.
 
 - React's synthetic events are pooled and nullified after the handler completes. You can't use an event after its handling function finished. It happened when I wanted to reset the form in `onSuccess` from `mutate`. The solution? Store a reference to the form: `const form = event.currentTarget`.
 
 - Union + type narrowing for mutually exclusive schemas in Zod.
 
-- Tanstack Query's `persisters` very easy to use for `localStorage`. Install the plugins, define the persister with retry, replace the contexts, configure `maxAge` (must match `gcTime`).
+- Tanstack Query's `persisters` very easy to use for `localStorage`. Install the plugins, define the persister, include retry logic, replace the contexts, configure `maxAge` (must match `gcTime`). That's it!
+
+- `min-w-0` allows text truncate to work properly in Flexbox layout. By default flex items' `min-width` is `auto`, which means the length of their text content will dictate their minimum width.
+
+- Motion's `layout` + `AnimatePresence` + `layout="position"` for smooth exit transitions. If either the flex container or flex items don't have `layout`, items will snap because of abrupt gap change when an item is removed.
+
+- Remember: `data-state={isOpen || undefined}` nice syntax to pair with Tailwind's `data-state`. It will select only if `isOpen` is true.
+
+- IntersectionObserver + `top: -1px` tricky for detecting when a sticky element gets stuck. Or just use an empty `div` before the header.
+
+- `scroll-behavior` + `scroll-padding` combo for anchor navigation.
 
 ### Remaining questions
 
-- The `contents` approach is too good to be true! Maybe some a11y issues is introduced?
+- The `contents` approach is too good to be true! Maybe some a11y issues are introduced?
+  - The only downside I noticed is that it seems this approach is preferable for unstyled containers, otherwise you will need to get rid of styles when the contents in plucked out.
+
+- Is my final solution worth 51h of work?
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+- Deploy some Server Function (on Netlify or Vercel) to middleware the browser and the API. This will prevent CORS block.
+- Use [this another URL shortening API](https://tinyurl.com/app/dev)
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+#### Fix this
+
+- Footer's `social-icons` not center aligned on ~900px
+- CTA's button shrinks (height) on 320px
 
 ### Useful resources
 
-<https://codepen.io/farnous/pen/abEbwMd>
-<https://ishadeed.com/article/display-contents/>
-<https://kilianvalkhof.com/2022/css-html/do-you-know-about-overflow-clip/>
-<https://stackoverflow.com/a/23675095/21858786> - Resize image keep aspect ratio?
-
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
-
-## Author
-
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
-
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+- [Collection of hamburger animations](https://codepen.io/farnous/pen/abEbwMd)
+- [Article about `display: contents`](https://ishadeed.com/article/display-contents/)
+- [Article about `overflow: clip`](https://kilianvalkhof.com/2022/css-html/do-you-know-about-overflow-clip/)
+- [Resize image keep aspect ratio?](https://stackoverflow.com/a/23675095/21858786)
+- [Article about IntersectionObserver](https://blog.webdevsimplified.com/2022-01/intersection-observer/)
+- [Sticky -1px trick](https://css-tricks.com/how-to-detect-when-a-sticky-element-gets-pinned/)
